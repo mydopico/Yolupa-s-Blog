@@ -1,0 +1,55 @@
+<% layout('layout/boilerplate')%>
+
+<div class="container d-flex justify-content-center align-items-center mt-5">
+	
+<div id="sign-form" class="card" style="width: 33%; ">
+	<div class="card-header text-center">
+       <h1>Inicia sesión</h1>      
+    </div>  <!-- end card-header -->
+	<div class="card-body">
+		<form action="/login" method="POST">			
+           <div class="mb-3">				
+	          <label for="inputUsername" class="form-label">
+				  <i class="fa fa-envelope prefix grey-text"></i> Nombre de usuario</label>
+              <input type="text" id="inputUsername" class="form-control" name="username" required>					 
+            </div>  
+            <div class="mb-3">
+              <label for="password" class="form-label"><i class="fa fa-lock prefix grey-text"></i> Password</label>
+              <input type="password" class="form-control" name="password" id="password" required>
+            </div>
+            <div class="d-grid gap-2 my-4">
+	          <button class="btn btn-md" type="submit">Inicia sesión</button>
+            </div>  
+			<hr>
+            <p class="my-4 me-2 small">Si no te has registrado: 
+				<a class="btn btn-sm ms-2" href="/register">Regístrate</a>
+			</p>
+			<hr>			
+			 <!-- Social login -->
+	       <div id="google" class="d-flex justify-content-start my-4">					
+              <p>Inicia sesión con:</p>		
+              <a  type="button" href="/auth/google" class="btn-floating btn-google btn-sm ms-4 mb-2">
+                 <i class="fab fa-google"></i>
+              </a>			
+		<!-- </div> -->
+		   </div>
+        </form>
+
+        <a class="btn btn-sm btn-success" href="/">Volver</a>
+		
+	</div> <!-- card-body -->
+	
+</div> <!-- end card -->
+		
+		<!-- </div> -->
+
+</div> <!-- row -->
+	
+
+
+
+
+
+
+
+

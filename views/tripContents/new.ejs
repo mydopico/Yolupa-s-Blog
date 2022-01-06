@@ -1,0 +1,42 @@
+<% layout('layout/boilerplate')%>
+
+<div class="container d-flex justify-content-center align-items-center mt-5">
+	
+ <div id="sign-form" class="card" style="width: 42%;">
+	 <div class="card-header text-center">
+       <h1>Añade contenido</h1>      
+    </div>  <!-- end card-header -->
+	
+	<div class="card-body">
+		<form action="/trips/<%= trip._id %>/tripContents" method="POST" enctype="multipart/form-data">  
+			<div class="mb-3">
+              <label for="title" class="sr-only">Titulo</label>
+              <input type="text" class="form-control" name="tripContent[title]" id="title" placeholder="Título" required>
+            </div>			
+			 <div class="mb-3">
+                    <label for="image" class="sr-only">Image</label>
+                    <input type="file" id="image" name="image" accept="image/*">
+                    <!-- <input type="file" id="image" name="image">				    -->
+             </div>			
+			<div class="mb-3">
+               <label for="content" class="sr-only">Contenido</label>	         
+			   <textarea type="text" class="form-control" name="tripContent[content]" style="height: 100px" id="content" placeholder="Contenido" required></textarea>				 
+            </div>						  
+            <div class="d-grid gap-2 my-4">
+	            <button class="btn btn-lg">Enviar</button>
+            </div>	
+        </form>
+
+        <a class="btn btn-sm" href="/trips/<%= trip._id %>">Volver</a>
+				
+	</div> <!-- card-body -->
+	
+</div>
+		
+		<!-- </div> -->
+
+</div> <!-- row -->
+	<br>
+
+
+

@@ -1,0 +1,67 @@
+<% layout('layout/boilerplate')%>
+
+<div class="container d-flex justify-content-center align-items-center mt-5">
+	
+ <div id="sign-form" class="card" style="width: 40%;">
+	 <div class="card-header text-center">
+       <h1>Edita tu viaje a "<%= trip.title %>"</h1>      
+    </div>  <!-- end card-header -->
+		
+	<div class="card-body">
+		
+		<form action="/trips/<%= trip._id %>?_method=PUT" method="POST">
+            <div class="mb-3">
+	            <label for="title">Título</label>
+                <input type="text" class="form-control" name="trip[title]" id="title" value="<%= trip.title %>">  
+            </div>
+            <div class="mb-3">
+                <label for="subtitle">Subtítulo</label>
+				<textarea type="text" class="form-control" name="trip[subtitle]" id="subtitle" style="height: 100px"
+						  value="<%= trip.subtitle %>"><%= trip.subtitle %></textarea>
+            </div>			
+            <div class="mb-3">
+                <label for="image">Imagen</label>
+                <input type="text" class="form-control" name="trip[image]" id="image" value="<%= trip.image %>"> 
+            </div>	
+			<div class="mb-3">
+                <label for="thanks">Agradecimiento</label>
+               <input class="form-control" type="text" name="trip[thanks]" id="thanks" value="<%= trip.thanks %>">
+          </div>
+			 <div class="mb-3">
+                <label for="location">Ubicación</label>
+                <input class="form-control" type="text" name="trip[location]" id="location" value="<%= trip.location %>">
+             </div>	
+			
+			<div class="mb-3">
+              <label for="continent">Continente</label>
+              <select name="trip[continent]" id="continent" class="form-control">  
+		        <option value="<%= trip.continent %>" selected><%= trip.continent %></option>  
+                <option value="Europa">Europa</option>
+                <option value="África">África</option>
+                <option value="América del Norte">América del Norte</option>
+                <option value="América del Sur">América del Sur</option>
+                <option value="Asia">Asia</option>
+                <option value="Oceanía">Oceanía</option>
+                <option value="Antártica">Antártica</option>
+              </select>
+            </div>	
+            
+            <div class="d-grid gap-2 my-4">
+	            <button class="btn btn-lg">Enviar</button>
+            </div>	
+        </form>
+
+        <a class="btn btn-sm" href="/trips/<%= trip._id %>">Volver</a>
+		
+	</div> <!-- card-body -->
+	
+</div>
+		
+		<!-- </div> -->
+
+</div> <!-- container-->
+	
+
+
+
+

@@ -1,0 +1,130 @@
+<% layout('layout/boilerplate')%>
+
+<div class="container mt-4 mb-4">
+	<div class="jumbotron" style="height: 15rem;">
+		<div class="row g-0">
+			<div class="col-md-6 col-lg-5">
+			       <h1 class="p-4">Reseñas</h1>
+			</div>	 
+			<div class="col-md-6 col-lg-5 d-none d-md-block">
+			       	<div id="library">			
+			            <span><i class="fas fa-stream fa-10x"></i></span>		
+		            </div>
+			 </div>	 			
+	    </div>	 
+	  <% if(currentUser && currentUser.isAdmin){ %>
+		<a type="button" class="btn btn-lg btn-outline-success m-4" href="/books/new">
+			<i class="fas fa-book-open"></i>         
+		</a>	
+	  <% } %>
+    </div>  <!-- end jumbotron -->
+	
+	<!-- ************** LAST POST *************************** -->
+	<section class="blog">
+	 <% if(book.length == 0) { %> 
+		 <h2 class="mt-5">Todavía no hay publicaciones</h2>
+	 <% } %>	
+	 <!-- < for (let trip of trips){ %>  -->		
+	 <% if(book.length > 0) { %> 
+	  <h2 class="mt-5">Última publicación</h2>
+	  <div  class="row d-flex justify-content-center mt-5 mb-5" >
+		<div class="card border-light mb-3 " style="max-width: 900px;">
+         <div class="row no-gutters">			
+            <div class="col-md-5 pl-5 my-auto">
+                <img  style="width: 15rem; " src="<%= book[0].image  %>" alt="<%=book[0].title%>" >  
+            </div>
+            <div class="col-md-7 pr-3 my-auto">
+				
+              <!-- <div class="d-flex justify-content-center">  -->
+                <h2 class="card-title mt-3"> 
+					<strong>
+		               <a id="books" href="/books/<%= book[0]._id  %>"> 
+			              <%= book[0].title %> </a> 
+					</strong>
+		        </h2>  
+                 <p class="card-text"><%= book[0].subtitle %>  </p>  
+		         <p class="card-text">
+				   <small class="text-muted">
+				      <%= moment(book[0].createdAt).locale('es').format('LL') %>
+				   </small> 
+				 </p>  
+               <!-- </div>   -->
+				
+            </div>
+          </div>
+       </div>	
+		</div> <!-- end last posts div --> 
+     <!-- < } %>	<!-- end for loop -->	 
+	</section>
+	
+	<!-- ************** ALL POSTS *************************** -->
+	<section class="blog">	
+	<h2>Todas las publicaciones</h2>
+	 <% } %>		 <!-- end if book.length > 0 -->	
+		
+	
+	<div id="books-index" class="row row-cols-1 row-cols-md-5 g-3 my-5 p-4">	
+	  	
+		<% book.slice(0,10).forEach(function(item){ %>		
+        <div col="col-lg-3">			
+	       <!-- <div class="card-group"> -->
+		      <div class="card border-light m-2" style="max-width: 12rem; ">
+				  <a id="books" href="/books/<%= item._id %>">
+			         <img class="card-img-top img-thumbnail" src="<%= item.image %>" alt="<%= item.title %>" >				 
+				   </a> 			  		   			 
+		      </div>     		
+       </div>	 
+       <% }) %>	
+		
+		<div id="div2" style="display:none" class="row row-cols-1 row-cols-md-5 g-3">
+		<% book.slice(10).forEach(function(item){ %>		
+           <div col="col-lg-3">			 
+	       <!-- <div class="card-group"> -->
+		      <div class="card border-light m-2" style="width: 11rem; ">
+				  <a id="books" href="/books/<%= item._id %>">
+			         <img class="card-img-top img-thumbnail" src="<%= item.image %>" alt="<%= item.title %>" >				 
+				   </a> 			  		   			 
+		      </div>         				 
+		   </div>         				 
+        <% }) %>
+		<!-- SHOW LESS -->
+            <p class="mt-2 m-auto text-center" style="color:grey;" onclick="showFunction('div1','div2')" 
+			   class="tooltip-test" title="Ver menos">
+			  <i class="fas fa-chevron-up fa-5x"></i>
+		    </p> 		
+	   </div> <!-- end div-2 --> 
+		
+	<!-- SHOW MORE -->
+		<% if(book.length > 10) { %>
+		    <div id="div1" class="row row-cols-1 row-cols-md-3 g-4">               
+				<p class="mt-2 m-auto text-center" style="color:grey;" onclick="showFunction('div2','div1')"
+				 class="tooltip-test" title="Ver más">
+				  <i class="fas fa-chevron-down fa-5x"></i>
+			  </p>
+		    </div>			  
+		
+	    <% } %>  
+		  
+		
+	</div>	 <!-- end row --> 
+		
+<!-- </div> -->
+	
+</section>
+
+
+
+<script>
+function showFunction(diva, divb) {
+    var x = document.getElementById(diva);
+    var y = document.getElementById(divb);
+          x.style.display = 'contents';
+          y.style.display = 'none';
+}
+	
+	      
+</script>
+
+
+
+

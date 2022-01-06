@@ -1,0 +1,40 @@
+<% layout('layout/boilerplate')%>
+
+<div class="container d-flex justify-content-center align-items-center mt-5">
+
+<div id="sign-form" class="card" style="width: 42%;">
+	<div class="card-header text-center">
+       <h1>Edita el contenido</h1>      
+    </div>  <!-- end card-header -->
+	
+	<div class="card-body">
+		<form action="/trips/<%= trip_id %>/tripContents/<%= tripContent._id %>?_method=PUT" method="POST" enctype="multipart/form-data"> 			  
+			<div class="mb-3">              
+              <input type="text" class="form-control" name="tripContent[title]" value="<%= tripContent.title %>">		
+            </div>			
+			<div class="mb-3">
+                    <label for="image" class="sr-only">Image</label>
+                    <input type="file" id="image" name="image" accept="image/*">
+             </div>	
+			<div class="mb-3">  
+			   <textarea class="form-control" type="text" name="tripContent[content]" style="height: 150px" value="<%= tripContent.content %>"><%= tripContent.content %></textarea>	
+            </div>
+						  
+            <div class="d-grid gap-2 my-4">
+	            <button class="btn btn-lg">Enviar</button>
+            </div>	
+        </form>
+            
+		 <a class="btn btn-sm" href="/trips/<%= trip_id %>">Volver</a>
+		
+	</div> <!-- card-body -->
+	
+</div>
+		
+		<!-- </div> -->
+
+</div> <!-- row -->
+	
+
+
+

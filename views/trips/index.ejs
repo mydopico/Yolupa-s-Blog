@@ -1,0 +1,208 @@
+<% layout('layout/boilerplate')%>
+
+
+<div class="container my-4">
+	
+	<!-- ************** JUMBOTRON *************************** -->
+	<div class="jumbotron my-5" style="height: 15rem;">
+		<div class="row g-0">
+			<div class="col-md-6 col-lg-5">
+			       <h1 class="p-4">Destinos</h1>
+			</div>	 
+			<div class="col-md-6 col-lg-5 d-none d-md-block">
+			       <span id="world"><i class="fas fa-globe fa-10x"></i></span>
+			</div>	 			
+	    </div>		  
+	  <% if(currentUser && currentUser.isAdmin){ %>
+		<a type="button" class="btn btn-lg btn-outline-success m-4" href="/trips/new">
+			<i class="fas fa-suitcase"></i>
+		</a>
+	  <% } %>
+    </div> <!-- end jumbotron -->
+	
+	<!-- ************** INTERACTIVE MAP *************************** -->
+	<section class="blog">
+		<!-- ************** unique location *************************** -->
+		<% let unique = [] %>
+		<% let loc = [] %>
+		<% for(let i = 0;  i < trips.length; i++) { %>
+		     
+		     <% loc.push(trips[i].location.split(",")[1]) %>
+		<% } %> 	
+		<% unique = [...new Set(loc)] %>
+		<!-- ************** unique continent *************************** -->
+		<% let uniqueC = [] %>
+		<% let cont = [] %>
+		<% for(let i = 0;  i < trips.length; i++) { %>
+		     <% cont.push(trips[i].continent) %>
+		<% } %> 	
+		<% uniqueC = [...new Set(cont)] %>
+		
+		<!-- ************** Data trips *************************** -->		
+	     <div>
+			 <h2>Hasta ahora...</h2>
+			<div class="row mt-5">
+               <div class="col-sm-4">
+                  <div class="card border-0 p-3 text-center">
+                    <!-- <div class="card-body text-center ">	  -->
+					       <h1 class="number-card-title"> <%= trips.length %></h1>					
+                     <p class="card-text text-muted">  PUBLICACIONES </p>       
+                    <!-- </div>  -->
+                 </div> 
+              </div>
+			   <div class="col-sm-4">
+                 <div class="card border-0 p-3 text-center">
+                   <!-- <div class="card-body text-center border border-1">		  	 -->
+					       <h1 class="number-card-title"> <%= unique.length  %></h1>				
+					   <p class="card-text text-muted"> PAÍSES</p>       
+                   <!-- </div> -->
+                </div>
+              </div>	
+              <div class="col-sm-4">
+                <div class="card border-0 p-3 text-center">
+                  <!-- <div class="card-body text-center border border-1"> -->
+                    <h1 class="number-card-title"> <%= uniqueC.length %> </h1>
+                    <p class="card-text text-muted">  CONTINENTES</p>       
+                  <!-- </div> -->
+                </div>
+               </div>
+              </div>			   
+        </div> <!-- end row data -->
+		
+	<div id='map' style='width: 1110px; height: 700px;'></div>	
+	</section> 	
+	
+	<!-- ************** LAST POST *************************** -->
+	<section class="blog">
+	 <% if(trips.length == 0) { %> 
+		 <h2 class="mt-5">Todavía no hay publicaciones</h2>
+	 <% } %>	
+	 <!-- < for (let trip of trips){ %>  -->		
+	 <% if(trips.length > 0) { %> 
+	  <h2 class="mt-5 mb-5">Último viaje</h2>
+	  <div  class="row d-flex justify-content-center mt-3 mb-5" >
+		<div class="card border-0 mb-3 " style="max-width: 900px;">
+         <div class="row no-gutters">			
+            <div class="col-md-6 my-auto">
+                <img  style="width: 25rem; " src="<%= trips[0].image %>" alt="<%= trips[0].title %>" >  
+            </div> 
+			 <!-- col-md-6 col-lg-7 d-flex align-items-center p-5 
+              col-md-6 p-4
+          -->
+            <div class="col-md-6 p-5 my-auto"> 
+              <!-- <div class="align-items-center justify-content-center"> -->
+				
+                <h2 class="card-title mt-4"> 
+					<strong>
+		               <a id="books" href="/trips/<%= trips[0]._id  %>"> 
+			              <%= trips[0].title %> </a> 
+					</strong>
+		        </h2>  
+                 <p class="card-text"><%= trips[0].subtitle.substring(0, 150)+ "..." %>  </p>  
+		         <p class="card-text">
+				   <small class="text-muted">
+				      <%= moment(trips[0].createdAt).locale('es').format('LL') %>
+				   </small> 
+				 </p>  
+              <!-- </div>  -->
+            </div>
+          </div>
+       </div>	
+		</div> <!-- end last posts div --> 
+     <!-- < } %>	<!-- end for loop -->	 
+	</section>
+	
+	<!-- ************** ALL POSTS *************************** -->
+	<!-- <section class="blog">	 -->
+	 <% } %>		 <!-- end if trips.length > 0    -->	
+	
+	<section class="blog">	
+	<h2 class="mb-4">Todos los viajes</h2>	
+	<!-- <div id="books-index" class="row d-flex justify-content-around px-5 py-3 my-3">		 -->
+	<div id="books-index" class="row row-cols-1 row-cols-md-3 g-4 my-5 p-3">	
+		
+    <!-- SHOW ALWAYS THE FIRST NINE CARDS	 -->
+		<% trips.slice(0,9).forEach(function(item){ %>				
+        <div col="col-lg-4">				       		
+		      <div class="card border-light text-white m-2" style="width: 20rem; ">				 
+			      <img class="img-thumbnail" src="<%= item.image %>" alt="<%= item.title %>" >				  
+				   <div class="card-img-overlay d-flex align-items-end">
+					    <a id="books" href="/trips/<%= item._id %>">
+                         <h3 class="card-title">
+							 <strong><%= item.title %></strong>							
+						</h3>   
+					   </a> 
+                   </div>  <!-- end card-img-overlay -->
+		      </div>      <!-- end card -->						
+        </div>	<!-- end col-lg-4 -->	       	
+       <% }) %>	<!-- end forEach -->	
+			
+		
+		 <!-- SHOW THE REST CARDS	 -->
+		   <div id="div2" style="display:none" class="row row-cols-1 row-cols-md-3 g-4">
+			<% trips.slice(9).forEach(function(item){ %>		
+             <div col="col-lg-4">	       				
+		      <div class="card border-light text-white m-2" style="width: 20rem; ">
+				  <img class="img-thumbnail" src="<%= item.image %>" alt="<%= item.title %>" >				  
+				   <div class="card-img-overlay d-flex align-items-end">
+					    <a id="books" href="/trips/<%= item._id %>">
+                         <h3 class="card-title">
+							 <strong><%= item.title %></strong>							
+						</h3>   
+					   </a> 
+                   </div>  		  		   			 
+		      </div>     <!-- end card -->			
+            </div>	<!-- end col-lg-4 -->	
+            <% }) %>
+			<!-- SHOW LESS BUTTON-->
+            <p class="mt-2 m-auto text-center" style="color:grey;" onclick="showFunction('div1','div2')" 
+			   class="tooltip-test" title="Ver menos">
+			  <i class="fas fa-chevron-up fa-5x"></i>
+		    </p> 
+		  	  
+	    </div> <!-- end div-2 -->	
+		<!-- SHOW MORE BUTTON-->
+		<% if(trips.length > 10){ %>		
+		   <div id="div1">
+              <p class="mt-2 m-auto text-center" style="color:grey;" onclick="showFunction('div2','div1')"
+				 class="tooltip-test" title="Ver más">
+				  <i class="fas fa-chevron-down fa-5x"></i>
+			  </p>
+				   
+		   </div>				
+		<%  } %>
+	</div>
+ </section> 
+			
+	<!-- </div>	 <!-- end row -->  
+</div>
+	
+
+
+
+
+
+
+
+
+<script>
+function showFunction(diva, divb) {
+    var x = document.getElementById(diva);
+    var y = document.getElementById(divb);
+          x.style.display = 'contents';
+          y.style.display = 'none';
+}
+	
+	 
+</script>
+
+<script>
+    const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+    const trips = <%- JSON.stringify(trips) %>;	   
+</script>
+
+
+<script src="/javascripts/indexPageMap.js"></script>
+
+
+

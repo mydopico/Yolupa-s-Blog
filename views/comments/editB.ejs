@@ -1,0 +1,33 @@
+<% layout('layout/boilerplate')%>
+
+<div class="container d-flex justify-content-center align-items-center mt-5">
+	
+ <div id="sign-form" class="card" style="width: 42%;">
+	 <div class="card-header text-center">
+          <h1>Edita el comentario</h1>      
+       </div>  <!-- end card-header -->
+	
+	<div class="card-body">
+		<form action="/books/<%= book_id %>/comments/<%= comment._id %>?_method=PUT" method="POST">  		 
+			<div class="mb-3">
+				<!-- <input class="form-control" type="text" name="comment[text]" value="< comment.text %>"> -->
+				<textarea class="form-control" type="text" name="comment[text]" style="height: 150px" value="<%= comment.text %>"><%= comment.text %></textarea>
+			</div>			 
+  
+            <div class="d-grid gap-2 my-4">
+	            <button class="btn btn-lg">Enviar</button>
+            </div>	
+        </form>
+
+        <a class="btn btn-sm btn-info"  href="/books/<%= book_id %>">Volver</a>
+		
+	</div> <!-- card-body -->
+	
+</div>
+		
+		<!-- </div> -->
+
+</div> <!-- row -->
+	
+
+

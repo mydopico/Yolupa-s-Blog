@@ -1,0 +1,63 @@
+<% layout('layout/boilerplate')%>
+
+<div class="container d-flex justify-content-center align-items-center mt-5">
+
+ <div id="sign-form" class="card" style="width: 44%;">
+	  <div class="card-header text-center">
+       <h1>Editar el libro "<%= book.title %>"</h1>      
+    </div>  <!-- end card-header -->
+	
+	<div class="card-body">
+		              
+		<form action="/books/<%= book._id %>?_method=PUT" method="POST">
+            <div class="mb-3">
+	            <label for="title">Título</label>				 
+                <input type="text" class="form-control" name="book[title]" id="title" value="<%= book.title %>">  
+            </div>                                                                    
+            <div class="mb-3">
+                <label for="subtitle">Subtítulo</label>				
+				<textarea type="text" class="form-control" name="book[subtitle]" id="subtitle" style="height: 100px"
+						  value="<%= book.subtitle %>"><%= book.subtitle %></textarea>
+            </div>			
+            <div class="mb-3">
+                <label for="image">Imagen</label>
+                <input type="text" class="form-control" name="book[image]" id="image" value="<%= book.image %>"> 
+            </div>	
+            <div class="mb-3">
+                <label for="plot">Trama</label>
+				<textarea type="text" class="form-control" name="book[plot]" id="plot" style="height: 150px"
+						  value="<%= book.plot %>"><%= book.plot %></textarea>	           
+            </div>
+			<div class="mb-3">
+                <label for="critique">Crítica</label>
+				<textarea type="text" class="form-control" name="book[critique]" id="critique" style="height: 150px"
+						  value="<%= book.critique %>"><%= book.critique %></textarea>		           
+            </div>
+			<div class="mb-3">
+                <label for="recommendation">Recomendación</label>
+				<textarea type="text" class="form-control" name="book[recommendation]" id="recommendation" style="height: 150px"
+						  value="<%= book.recommendation %>"><%= book.recommendation %></textarea>	            
+            </div>
+			
+			<div class="mb-3">
+                <label for="rating">Valoración</label>
+				<small class="text-muted">- Mínimo 1, Máximo 5</small>
+	            <input type="range" class="form-control" name="book[rating]" id="rating"min="1" max="5" step="0.5"  value="<%= book.rating %>">
+            </div>
+			
+            <div class="d-grid gap-2 my-5">
+	            <button class="btn btn-lg">Enviar</button>
+            </div>	
+        </form>
+
+        <a class="btn btn-sm" href="/books/<%= book._id %>">Volver</a>
+		                              
+	</div> <!-- card-body -->
+	
+</div>
+		
+		<!-- </div> -->
+
+</div> <!-- row -->
+	
+

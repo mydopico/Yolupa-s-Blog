@@ -1,0 +1,150 @@
+<% layout('layout/boilerplate')%>
+
+<div class="container">
+	
+ <div id="home" class="p-4 p-md-5 my-4 text-white rounded">
+    <div class="col-md-6 px-0">
+      <h1 class="display-4 fst-italic">Descubre mis libros y viajes favoritos.</h1>
+      <p class="lead my-3">El blog de Yolupa es la colección de libros y viajes que recomiendo a todo el mundo</p>
+      <!-- <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continua leyendo...</a></p> -->
+    </div>
+  </div>
+	
+	
+<div class="row row-cols-1 row-cols-md-3 g-4 my-4">
+	
+<!-- FIRST COL	 -->
+<div class="col">	
+<% trip.slice(0,1).forEach(function(trip){ %>	
+  <div class="card mb-3">
+    <img class="card-img-top mx-auto p-2" style="width: 21rem;" src="<%= trip.image %>" alt="Card image cap">
+    <div class="card-body">
+	  <h6 class="card-title text-primary font-weight-bold">VIAJES</h6>	
+      <h4 class="card-title"><%= trip.title %></h4>
+       <p class="card-text"><%= trip.subtitle.substring(0, 120)+ "..." %>
+		  <a class="text-decoration-none" href="/trips/<%=trip._id%>"> Leer más</a>
+	   </p>
+	   <p class="card-text"><small class="text-muted"><%= moment(trip.createdAt).locale('es').format('LL') %></small></p>	
+    </div>
+  </div>
+<% }); %>
+	
+	<% if(trip.length > 1){ %>	
+<% trip.slice(1,2).forEach(function(trip){ %>		
+  <div class="card mb-3">
+   <img class="card-img-top mx-auto p-2" style="width: 21rem;" src="<%= trip.image %>" alt="Card image cap">
+    <div class="card-body">
+	  <h6 class="card-title text-primary font-weight-bold">VIAJES</h6>	
+      <h5 class="card-title"><%= trip.title %></h5>
+      <p class="card-text"><%= trip.subtitle.substring(0, 120)+ "..." %>
+		  <a class="text-decoration-none" href="/trips/<%=trip._id%>"> Leer más</a>
+		</p>
+	   <p class="card-text"><small class="text-muted"><%= moment(trip.createdAt).locale('es').format('LL') %></small></p>	
+    </div>
+  </div>
+<% }); %>
+<% }; %>	
+	
+	</div> <!-- end-col -->
+	
+
+<!-- SECOND COL	 -->
+<div class="col">	
+ <div class="card bg-info text-white text-center p-3 mb-3">
+    <blockquote class="blockquote mb-0">
+      <h3>ÚLTIMAS PUBLICACIONES</h3>     
+    </blockquote>
+  </div>
+	<% book.slice(0,1).forEach(function(book){ %>		
+  <div class="card mb-3">
+    <img class="card-img-top mx-auto d-block mt-3 mb-3" style="width: 12rem;"  src="<%= book.image %>" alt="Card image cap">
+    <div class="card-body">
+	  <h6 class="card-title text-success font-weight-bold">LIBROS</h6>	
+      <h5 class="card-title"><%= book.title %></h5>
+      <p class="card-text"><%= book.subtitle.substring(0, 120)+ "..." %>
+		  <a class="text-decoration-none" href="/books/<%=book._id%>"> Leer más</a></p>
+      <p class="card-text"><small class="text-muted"><%= moment(book.createdAt).locale('es').format('LL') %></small></p>
+    </div>
+  </div>
+<% }); %>	
+	<% book.slice(1,2).forEach(function(book){ %>
+	<div class="card mb-3">
+		<img class="card-img-top mx-auto d-block mt-3 mb-3" style="width: 12rem;"  src="<%= book.image %>" alt="Card image cap">
+    <div class="card-body">
+      <h6 class="card-title text-success font-weight-bold">LIBROS</h6>	
+      <h5 class="card-title"><%= book.title %></h5>
+      <p class="card-text"><%= book.subtitle.substring(0, 120)+ "..." %>
+		  <a class="text-decoration-none" href="/books/<%=book._id%>"> Leer más</a></p>
+      <p class="card-text"><small class="text-muted"><%= moment(book.createdAt).locale('es').format('LL') %></small></p>
+    </div>
+  </div>
+	<% }); %>
+	
+</div>
+	
+<!-- THIRD COL	 -->	
+<div class="col">	
+	
+  <div class="card bg-light p-4 mb-3">
+    <!-- <img class="card-img" src="..." alt="Card image"> -->
+	  <img class="user-img mx-auto d-block" src="/images/girl.png" 
+				 alt="user default image"> 
+  </div>         
+  <div class="aboutcard p-2 text-center bg-light mb-3">
+    <div class="card-body">
+      <!-- <h4 class="card-title">About</h4> -->
+		<h1 class="card-title">Yolupa</h1>
+      <h2 class="card-text">Lectora</h2>     
+      <h2 class="card-text">Aventurera</h2>     
+    </div>
+	<div class="card-footer text-muted">
+		<p> 					   
+			   <a type="button" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwdb-test1.run-us-west2.goorm.io%2Fbooks%2F5f09d258b7cbb00286167bec"                           
+				  class="btn-floating btn-fb btn-sm"> <i class="fab fa-facebook-f"></i>
+               </a>
+               <a type="button" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwdb-test1.run-us-west2.goorm.io%2Fbooks%2F5f09d258b7cbb00286167bec" 
+				  class="btn-floating btn-tw btn-sm"> <i class="fab fa-twitter"></i>
+               </a>             
+               <!-- <a type="button" href="#" 
+				  class="btn-floating btn-google btn-sm"> <i class="fab fa-google"></i>
+               </a>	 -->
+		  </p>	
+    
+  </div>   <!-- end card-footer -->
+  </div>
+ 	
+  <!-- <div class="card bg-light p-2 mb-3">
+    <div class="card-body">
+      <h5 class="card-title">Comparte</h5>
+		 <ol class="list-unstyled">
+            <li><a href="#">GitHub</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Facebook</a></li>
+          </ol>     
+    </div>
+  </div> -->
+</div>
+</div>
+		
+
+
+	
+
+
+ 
+
+	<div class="col">
+ 
+  </div>
+	
+
+	
+	
+</div> <!-- end container -->
+
+
+
+
+
+
+
